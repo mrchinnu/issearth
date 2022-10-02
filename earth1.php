@@ -1,0 +1,47 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="60"/> 
+    <meta charset="utf-8" />
+ <script
+  
+    <script
+       src="https://threejs.org/build/three.js"
+       ></script>
+     <script
+       src="https://rawgit.com/mrdoob/three.js/master/examples/js/controls/TrackballControls.js"
+       ></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   
+    <script src="geoloc.js"></script>
+
+  </head>
+  <body onload="plot()"><div id="view" align="center">
+<h3>latitude:<span id="lat"></span></h3>
+<h3>longitude:<span id="long"></span></h3></div>
+<script> function plot() {
+    $.ajax({
+        type: 'GET',
+        dataType: 'json',
+        url: 'https://api.wheretheiss.at/v1/satellites/25544',
+        async: false,
+        crossDomain: true,
+        complete: function(data) {
+            if (data.readyState === 4 && data.status === 200) {
+                var lat = data.responseJSON.latitude;
+                var long = data.responseJSON.longitude;
+                document.getElementById("lat").innerHTML = lat;
+document.getElementById("long").innerHTML = long;
+
+}
+}
+});
+}
+</script>
+<div align="center">
+<div class="sketchfab-embed-wrapper"> <iframe title="ISS International Space Station" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" src="https://sketchfab.com/models/6887b8f3924e4a348daf2b23fce48d7c/embed"> </iframe> </p></div>
+
+</div>
+</body>
+</html>
